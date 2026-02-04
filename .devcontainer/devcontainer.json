@@ -1,0 +1,25 @@
+{
+  "name": "React Vite TS",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "remoteUser": "node",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "dsznajder.es7-react-js-snippets",
+        "vscode.typescript-language-features"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+  "forwardPorts": [5173, 5174],
+  "portsAttributes": {
+    "5173": {"label": "Vite Dev Server"},
+    "5174": {"label": "Vite HMR"}
+  },
+  "postCreateCommand": "if [ -f package.json ]; then npm install; fi"
+}
