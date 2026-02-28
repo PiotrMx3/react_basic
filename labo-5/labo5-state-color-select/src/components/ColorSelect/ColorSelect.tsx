@@ -51,7 +51,7 @@ const ColorSelect = () => {
           ))}
         </select>
         <br />
-        <button onClick={() => setColors(selectedColors)} type="button">
+        <button onClick={() => setColors([...selectedColors])} type="button">
           Show Colors
         </button>
 
