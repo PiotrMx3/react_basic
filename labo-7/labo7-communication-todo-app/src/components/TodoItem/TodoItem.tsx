@@ -11,7 +11,7 @@ interface TodoItemProps {
 
 const TodoItem = ({todo, index, onMarkCompleted}: TodoItemProps) => {
   return (
-    <div key={index}>
+    <div>
       <input
         type="checkbox"
         checked={todo.completed}

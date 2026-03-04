@@ -16,7 +16,12 @@ const TodoList = ({todos, onMarkCompleted}: TodoListProps) => {
   return (
     <div>
       {todosList.map((todo, index) => (
-        <TodoItem todo={todo} index={index} onMarkCompleted={onMarkCompleted} />
+        <TodoItem
+          key={index}
+          todo={todo}
+          index={index}
+          onMarkCompleted={onMarkCompleted}
+        />
       ))}
     </div>
   );
