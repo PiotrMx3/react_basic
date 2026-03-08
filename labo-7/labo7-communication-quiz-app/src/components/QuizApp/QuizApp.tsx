@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import Question from "../Question/Question";
+import {Circles} from "react-loader-spinner";
 
 export interface IQuestions {
   type: string;
@@ -17,31 +18,43 @@ interface IData {
 
 const QuizApp = () => {
   const [questionsArray, setQuestionsArray] = useState<IQuestions[]>([]);
-  const isMouted = useRef(false);
+  const isMounted = useRef(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
-    const response = await fetch("https://opentdb.com/api.php?amount=10");
-    if (!response.ok) throw new Error("fetch failed");
-    const data: IData = await response.json();
+    setIsLoading(true);
 
-    const modifided: IQuestions[] = data.results.map((e) => {
-      return {
-        ...e,
-        user_answer: null,
-      };
-    });
+    try {
+      const response = await fetch("https://opentdb.com/api.php?amount=10");
+      if (!response.ok) throw new Error("fetch failed");
+      const data: IData = await response.json();
 
-    return modifided;
+      const modifided: IQuestions[] = data.results.map((e) => {
+        return {
+          ...e,
+          user_answer: null,
+        };
+      });
+
+      return modifided;
+    } catch (error) {
+      console.error(error);
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    isMouted.current = true;
+    isMounted.current = true;
 
-    if (isMouted.current) {
-      fetchData().then((result) => setQuestionsArray(result));
+    if (isMounted.current) {
+      fetchData().then((result) => {
+        if (isMounted.current) setQuestionsArray(result);
+      });
     }
     return () => {
-      isMouted.current = false;
+      isMounted.current = false;
     };
   }, []);
 
@@ -53,7 +66,7 @@ const QuizApp = () => {
 
   const handleMoreQuestions = () => {
     fetchData().then((result) => {
-      if (isMouted.current) setQuestionsArray((prev) => [...prev, ...result]);
+      if (isMounted.current) setQuestionsArray((prev) => [...prev, ...result]);
     });
   };
 
@@ -67,6 +80,19 @@ const QuizApp = () => {
           index={i}
         />
       ))}
+
+      {isLoading && (
+        <Circles
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="circles-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      )}
+
       <br />
       <button onClick={handleMoreQuestions} type="button">
         Load More
