@@ -1,17 +1,8 @@
-import {createContext, useState} from "react";
+import {useState} from "react";
 import "./App.css";
 import SquareRow from "./components/SquareRow/SquareRow";
 import SelectionBox from "./components/SelectionBox/SelectionBox";
-
-interface ISettingsContext {
-  color: string;
-  onSetColor: (color: string) => void;
-}
-
-export const SettingsContext = createContext<ISettingsContext>({
-  color: "red",
-  onSetColor() {},
-});
+import {SettingsContext} from "./context";
 
 function App() {
   const [color, setColor] = useState<string>("red");

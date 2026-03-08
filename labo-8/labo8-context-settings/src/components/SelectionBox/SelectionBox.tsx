@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {SettingsContext} from "../../App";
+import {SettingsContext} from "../../context";
 
 const SelectionBox = () => {
   const {color, onSetColor} = useContext(SettingsContext);

@@ -1,9 +1,5 @@
 import {useState, createContext, useContext} from "react";
 
-interface LineProps {
-  text: string;
-}
-
 const NeoContext = createContext<string>("");
 
 const FourthLine = () => {

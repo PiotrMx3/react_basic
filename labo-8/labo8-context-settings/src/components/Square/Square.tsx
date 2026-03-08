@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {SettingsContext} from "../../App";
+import {SettingsContext} from "../../context";
 
 const Square = () => {
   const {color, onSetColor} = useContext(SettingsContext);
