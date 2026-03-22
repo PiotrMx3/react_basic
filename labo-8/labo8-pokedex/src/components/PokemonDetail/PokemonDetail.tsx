@@ -1,5 +1,5 @@
 import {Link, useParams} from "react-router-dom";
-import useFetchPokemonDetail from "../hooks/useFetchPokemonDeatil";
+import useFetchPokemonDetail from "../../hooks/useFetchPokemonDeatil";
 
 const PokemonDetail = () => {
   const {id} = useParams();
@@ -10,9 +10,24 @@ const PokemonDetail = () => {
   return (
     <>
       {data === null ? (
-        <div className="pokemon-detail">
-          <p>Pokemon niet gevonden!</p>
-        </div>
+        <>
+          <div className="pokemon-detail">
+            <p>Pokemon niet gevonden!</p>
+          </div>
+          <div>
+            <Link
+              style={{
+                display: "block",
+                color: "inherit",
+                textDecoration: "none",
+                fontSize: "2rem",
+              }}
+              to={"/pokemon"}
+            >
+              Back
+            </Link>
+          </div>
+        </>
       ) : (
         <div className="pokemon-detail">
           <div className="pokemon-data-container">
